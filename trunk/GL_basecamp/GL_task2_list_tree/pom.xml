@@ -7,26 +7,12 @@
     <artifactId>GL_basecamp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>GL_basecamp_task1</groupId>
-  <artifactId>GL_basecamp_task1</artifactId>
-  <name>GL_basecamp_task1</name>
+  <groupId>GL_basecamp_task2</groupId>
+  <artifactId>list_tree</artifactId>
+  <version>1.0.0</version>
+  <name>GL Basecamp Task2 - Single linked list, Binary tree</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.mockito</groupId>
-    	<artifactId>mockito-all</artifactId>
-    	<version>1.9.5</version>
-    	<scope>test</scope>
-    </dependency>
-  </dependencies>
-  <version>1.0.0</version>
 </project>
