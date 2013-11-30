@@ -25,8 +25,8 @@ public class Main {
 	    return;
 	}
 	File output = new File(args[1]);
-	Runner runner = new Runner();
-	runner.run(input, output);
+	Runner setRunner = new SetRunner();
+	setRunner.run(input, output);
     }
 
 }
