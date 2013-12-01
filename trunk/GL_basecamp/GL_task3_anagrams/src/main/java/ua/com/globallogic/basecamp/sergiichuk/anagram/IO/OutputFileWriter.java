@@ -1,4 +1,4 @@
-package ua.com.globallogic.basecamp.sergiichuk.anagram;
+package ua.com.globallogic.basecamp.sergiichuk.anagram.IO;
 
 import java.io.Closeable;
 import java.io.File;
@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import ua.com.globallogic.basecamp.sergiichuk.anagram.AnagramSet;
 
 public class OutputFileWriter implements Closeable {
     private final static String CHARSET = "UTF-8";

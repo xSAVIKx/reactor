@@ -10,11 +10,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-	if (args.length != 2) {
-	    usage();
-	    return;
-	}
-	if (args[0].equalsIgnoreCase(args[1])) {
+	if (args.length != 2 || args[0].equalsIgnoreCase(args[1])) {
 	    usage();
 	    return;
 	}

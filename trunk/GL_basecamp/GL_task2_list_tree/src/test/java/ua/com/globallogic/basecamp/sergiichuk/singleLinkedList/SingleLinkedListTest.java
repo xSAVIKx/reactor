@@ -1,13 +1,13 @@
 package ua.com.globallogic.basecamp.sergiichuk.singleLinkedList;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class SingleLinkedListTest {
-    private List<String> singleLinkedList;
+    private SingleLinkedList<String> singleLinkedList;
 
     @Test
     public void testSizeOne() {
@@ -18,7 +18,7 @@ public class SingleLinkedListTest {
     }
 
     @Test
-    public void testContainsStringHelloTrue() {
+    public void testContainsTrue() {
 	singleLinkedList = new SingleLinkedList<String>();
 	final String hello = "hello";
 	singleLinkedList.add(hello);
@@ -26,14 +26,14 @@ public class SingleLinkedListTest {
     }
 
     @Test
-    public void testContainsStringHelloFalse() {
+    public void testContainsFalse() {
 	singleLinkedList = new SingleLinkedList<String>();
 	final String hello = "hello";
 	assertFalse(singleLinkedList.contains(hello));
     }
 
     @Test
-    public void testAddTone() {
+    public void testAddT() {
 	singleLinkedList = new SingleLinkedList<String>();
 	final String oneString = "one";
 	singleLinkedList.add(oneString);
@@ -42,7 +42,7 @@ public class SingleLinkedListTest {
     }
 
     @Test
-    public void testRemoveObjectOneTrue() {
+    public void testRemoveObjectTrue() {
 	singleLinkedList = new SingleLinkedList<String>();
 	final String oneString = "one";
 	singleLinkedList.add(oneString);
@@ -51,7 +51,7 @@ public class SingleLinkedListTest {
     }
 
     @Test
-    public void testRemoveObjectOneFalse() {
+    public void testRemoveObjectFalse() {
 	singleLinkedList = new SingleLinkedList<String>();
 	final String oneString = "one";
 	assertFalse(singleLinkedList.remove(oneString));
@@ -82,5 +82,30 @@ public class SingleLinkedListTest {
 	singleLinkedList.add(oneString);
 	assertEquals(2, singleLinkedList.size());
 	assertEquals(hello, singleLinkedList.get(0));
+    }
+
+    @Test
+    public void testIndexOf() {
+	singleLinkedList = new SingleLinkedList<String>();
+	final String oneString = "one";
+	final String nullString = null;
+	singleLinkedList.add(oneString);
+	singleLinkedList.add(nullString);
+	singleLinkedList.add(nullString);
+	singleLinkedList.add(oneString);
+	assertEquals(4, singleLinkedList.size());
+	assertEquals(1, singleLinkedList.indexOf(nullString));
+    }
+
+    @Test
+    public void testLastIndexOf() {
+	singleLinkedList = new SingleLinkedList<String>();
+	final String oneString = "one";
+	final String nullString = null;
+	singleLinkedList.add(oneString);
+	singleLinkedList.add(nullString);
+	singleLinkedList.add(nullString);
+	singleLinkedList.add(oneString);
+	assertEquals(2, singleLinkedList.lastIndexOf(nullString));
     }
 }

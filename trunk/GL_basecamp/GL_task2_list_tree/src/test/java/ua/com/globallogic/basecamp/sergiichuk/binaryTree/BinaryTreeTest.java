@@ -12,27 +12,39 @@ public class BinaryTreeTest {
     private final Integer oneInteger = 1;
 
     @Test
-    public void testAddRootString() {
+    public void testAdd() {
 	testTree = new BinaryTree<Integer>();
 	testTree.add(oneInteger);
 	assertEquals(1, testTree.size());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddIllegalArgumentException() {
+	testTree = new BinaryTree<Integer>();
+	testTree.add(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveIllegalArgumentException() {
+	testTree = new BinaryTree<Integer>(oneInteger);
+	testTree.remove(null);
+    }
+
     @Test
-    public void testRemoveRootOnlyRootElementIsPresent() {
+    public void testRemoveOnlyRootElementIsPresent() {
 	testTree = new BinaryTree<Integer>(oneInteger);
 	assertEquals(oneInteger, testTree.remove(oneInteger));
     }
 
     @Test
-    public void testRemoveRootElementWithOneLeftLeafIsPresent() {
+    public void testRemoveElementWithOneLeftLeafIsPresent() {
 	testTree = new BinaryTree<Integer>(2);
 	testTree.add(oneInteger);
 	assertEquals(oneInteger, testTree.remove(oneInteger));
     }
 
     @Test
-    public void testRemoveRootElementWithOneLeftLeafWithChild() {
+    public void testRemoveElementWithOneLeftLeafWithChild() {
 	testTree = new BinaryTree<Integer>(2);
 	testTree.add(oneInteger);
 	testTree.add(0);
@@ -41,7 +53,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void testRemoveRootElementWithOneLeftLeafWithTwoChilds() {
+    public void testRemoveElementWithOneLeftLeafWithTwoChilds() {
 	testTree = new BinaryTree<Integer>(3);
 	testTree.add(oneInteger);
 	testTree.add(0);
@@ -53,12 +65,12 @@ public class BinaryTreeTest {
     @Test
     public void testRemoveNoElementToRemove_getNull() {
 	testTree = new BinaryTree<Integer>(3);
-	assertEquals(null, testTree.remove(oneInteger));
+	assertNull(testTree.remove(oneInteger));
 	assertEquals(1, testTree.size());
     }
 
     @Test
-    public void testRemoveRootElementWithTwoLeafWhichHaveTwoChildsWithChilds() {
+    public void testRemoveElementWithTwoLeafWhichHaveTwoChildsWithChildren() {
 	final Integer FOUR = 4;
 	testTree = new BinaryTree<Integer>(FOUR);
 	testTree.add(3);
@@ -86,7 +98,7 @@ public class BinaryTreeTest {
 	testTree.add(6);
 	testTree.clear();
 	assertEquals(0, testTree.size());
-	assertEquals(null, testTree.getRoot());
+	assertNull(testTree.getRoot());
     }
 
     @Test
@@ -124,6 +136,12 @@ public class BinaryTreeTest {
 	testTree.add(8);
 	testTree.add(8);
 	assertFalse(testTree.contains(ONE));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testContainsIllegalArgumentException() {
+	testTree = new BinaryTree<Integer>(oneInteger);
+	testTree.contains(null);
     }
 
 }
