@@ -67,6 +67,19 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 	}
     }
 
+    /**
+     * Tries to remove element from leaf
+     * 
+     * @param leaf
+     *            leaf to remove element from
+     * @param parent
+     *            parent leaf of 'leaf'
+     * @param element
+     *            element to remove from
+     * @return removed element or null
+     * 
+     * @see Deleting of binary tree element, wiki - http://goo.gl/Ps3mcw
+     */
     private T removeElementFromLeaf(Node<T> leaf, Node<T> parent, T element) {
 	T elementToReturn = null;
 	// if needed element was found in current leaf
@@ -74,19 +87,30 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 	    elementToReturn = leaf.data;
 	    // if both children are present
 	    if (leaf.rightLeaf != null && leaf.leftLeaf != null) {
+		// get left leaf of current leaf.rightLeaf
 		Node<T> nodeToBeSwappedWithDeletedOne = findLeftLeafInSubtree(leaf.rightLeaf);
+		// we'll swap data of current leaf with data or
+		// currentLeaf->rightLeaf->leftLeaf
 		leaf.data = nodeToBeSwappedWithDeletedOne.data;
-		// if there is left leaf in leaf.rightleaf
+		// if there is left leaf in leaf.rightleaf we'll recursively
+		// delete that leaf, which data we have had exchange with
+		// current leaf, giving currentLeaf->rightLeaf as parent of
+		// exchanged one
 		if (nodeToBeSwappedWithDeletedOne != leaf.rightLeaf)
 		    removeElementFromLeaf(nodeToBeSwappedWithDeletedOne,
 			    leaf.rightLeaf, nodeToBeSwappedWithDeletedOne.data);
+		// else we'll recursively delete leaf, which data we have had
+		// exchange with current leaf, giving currentLeaf as parent of
+		// exchanged one
 		else
 		    removeElementFromLeaf(nodeToBeSwappedWithDeletedOne, leaf,
 			    nodeToBeSwappedWithDeletedOne.data);
 		// if leaf has only "left" child
 	    } else if (leaf.leftLeaf != null && leaf.rightLeaf == null) {
+		// if current leaf is leaf.parent left child
 		if (leaf.equals(parent.leftLeaf)) {
 		    parent.leftLeaf = leaf.leftLeaf;
+		    // if current leaf is leaf.parent right child
 		} else {
 		    parent.rightLeaf = leaf.leftLeaf;
 		}
@@ -95,14 +119,17 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 		leaf = null;
 		// if the leaf has only "right" child
 	    } else if (leaf.rightLeaf != null && leaf.leftLeaf == null) {
+		// if current leaf is leaf.parent left child
 		if (leaf.equals(parent.leftLeaf)) {
 		    parent.leftLeaf = leaf.rightLeaf;
+		    // if current leaf is leaf.parent right child
 		} else {
 		    parent.rightLeaf = leaf.rightLeaf;
 		}
 		changeParentLink(leaf, parent);
 		leaf.data = null;
 		leaf = null;
+		// if leaf has no childs
 	    } else {
 		if (leaf.equals(parent.leftLeaf)) {
 		    parent.leftLeaf = null;
@@ -112,9 +139,13 @@ public class BinaryTree<T extends Comparable<T>> implements Tree<T> {
 		leaf.data = null;
 		leaf = null;
 	    }
+	    // if element to remove is 'smaller' than current leaf data and
+	    // current leaf has left leaf
 	} else if (element.compareTo(leaf.data) < 0 && leaf.leftLeaf != null) {
 	    elementToReturn = removeElementFromLeaf(leaf.leftLeaf, leaf,
 		    element);
+	    // if element to remove is 'bigger' than current leaf data and
+	    // current leaf has right leaf
 	} else if (element.compareTo(leaf.data) > 0 && leaf.rightLeaf != null) {
 	    elementToReturn = removeElementFromLeaf(leaf.rightLeaf, leaf,
 		    element);

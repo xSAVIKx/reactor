@@ -1,8 +1,8 @@
 package ua.com.globallogic.basecamp.sergiichuk.anagram;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class AnagramSet {
@@ -17,7 +17,7 @@ public class AnagramSet {
     private char[] firstAnagramChars;
 
     public AnagramSet(String word) {
-	anagrams = new LinkedHashSet<String>();
+	anagrams = new HashSet<String>();
 	anagrams.add(word.toLowerCase());
 	firstAnagramChars = word.toLowerCase().toCharArray();
 	Arrays.sort(firstAnagramChars);
@@ -32,11 +32,13 @@ public class AnagramSet {
      *         contains such word.
      */
     public boolean addAnagram(String word) {
-	if (word.isEmpty() || word.length() < 1)
+	if (word == null)
 	    return false;
-	if (isAnagram(word.toLowerCase()))
-	    return anagrams.add(word.toLowerCase());
-	return false;
+	String lowerCaseWord = word.toLowerCase();
+	return !(lowerCaseWord.isEmpty() || lowerCaseWord.length() < 1 || anagrams
+		.contains(lowerCaseWord))
+		&& isAnagram(lowerCaseWord)
+		&& anagrams.add(lowerCaseWord);
     }
 
     /**

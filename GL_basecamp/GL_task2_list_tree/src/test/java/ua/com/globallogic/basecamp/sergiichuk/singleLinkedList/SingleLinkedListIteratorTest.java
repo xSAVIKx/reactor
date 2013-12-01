@@ -1,15 +1,16 @@
 package ua.com.globallogic.basecamp.sergiichuk.singleLinkedList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
 public class SingleLinkedListIteratorTest {
-    private List<String> singleLinkedList;
+    private SingleLinkedList<String> singleLinkedList;
     private Iterator<String> singleLinkedListIterator;
 
     @Test

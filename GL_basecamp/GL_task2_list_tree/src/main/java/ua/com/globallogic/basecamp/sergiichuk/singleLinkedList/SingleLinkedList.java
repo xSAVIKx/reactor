@@ -1,9 +1,6 @@
 package ua.com.globallogic.basecamp.sergiichuk.singleLinkedList;
 
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -12,7 +9,7 @@ import java.util.NoSuchElementException;
  * 
  * @param <T>
  */
-public class SingleLinkedList<T> implements List<T> {
+public class SingleLinkedList<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
@@ -40,27 +37,6 @@ public class SingleLinkedList<T> implements List<T> {
 	return new SingleLinkedListIterator();
     }
 
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public Object[] toArray() {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    @SuppressWarnings("hiding")
-    public <T> T[] toArray(T[] a) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
     private void linkLast(T e) {
 	if (head != null) {
 	    final Node<T> last = tail;
@@ -74,9 +50,8 @@ public class SingleLinkedList<T> implements List<T> {
 	size++;
     }
 
-    public boolean add(T e) {
+    public void add(T e) {
 	linkLast(e);
-	return true;
     }
 
     private void unlink(Node<T> elementToUnlink, Node<T> previousElement) {
@@ -125,56 +100,6 @@ public class SingleLinkedList<T> implements List<T> {
 	return false;
     }
 
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public boolean containsAll(Collection<?> c) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public boolean addAll(Collection<? extends T> c) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public boolean addAll(int index, Collection<? extends T> c) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public boolean removeAll(Collection<?> c) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public boolean retainAll(Collection<?> c) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
     public void clear() {
 	for (Node<T> current = head; current != null;) {
 	    Node<T> next = current.next;
@@ -186,11 +111,6 @@ public class SingleLinkedList<T> implements List<T> {
 	size = 0;
     }
 
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
     public T get(int index) {
 	checkIndexBounds(index);
 	return getNodeByIndex(index).currentData;
@@ -202,36 +122,6 @@ public class SingleLinkedList<T> implements List<T> {
 	    neededNode = neededNode.next;
 	}
 	return neededNode;
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public T set(int index, T element) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public void add(int index, T element) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public T remove(int index) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
     }
 
     private void checkIndexBounds(int index) {
@@ -280,36 +170,6 @@ public class SingleLinkedList<T> implements List<T> {
 	    }
 	}
 	return index;
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public ListIterator<T> listIterator() {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public ListIterator<T> listIterator(int index) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
-    }
-
-    /**
-     * This method is not supported
-     * 
-     * @throws UnsupportedOperationException
-     */
-    public List<T> subList(int fromIndex, int toIndex) {
-	throw new UnsupportedOperationException(
-		"This implementation doesn't support this method.");
     }
 
     private class SingleLinkedListIterator implements Iterator<T> {

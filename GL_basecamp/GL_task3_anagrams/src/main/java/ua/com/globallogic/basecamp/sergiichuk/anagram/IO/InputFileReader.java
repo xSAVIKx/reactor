@@ -1,4 +1,4 @@
-package ua.com.globallogic.basecamp.sergiichuk.anagram;
+package ua.com.globallogic.basecamp.sergiichuk.anagram.IO;
 
 import java.io.Closeable;
 import java.io.File;
@@ -15,8 +15,7 @@ public class InputFileReader implements Closeable {
 	this.linesInOneBlock = linesInOneBlock;
 	try {
 	    scanner = new Scanner(fileToRead);
-	} catch (FileNotFoundException e) {
-	    e.printStackTrace();
+	} catch (FileNotFoundException ignore) {
 	}
     }
 
