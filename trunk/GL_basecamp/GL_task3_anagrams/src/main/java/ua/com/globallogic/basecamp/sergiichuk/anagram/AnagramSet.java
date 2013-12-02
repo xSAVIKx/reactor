@@ -16,7 +16,18 @@ public class AnagramSet {
      */
     private char[] firstAnagramChars;
 
+    /**
+     * AnagramSet constructor
+     * 
+     * @param word
+     *            word to be initial in current set of anagrams
+     * @throws IllegalArgumentException
+     *             if 'word' is null
+     */
     public AnagramSet(String word) {
+	if (word == null)
+	    throw new IllegalArgumentException(String.format(
+		    "Anagram set initial 'word' cannot be %s", word));
 	anagrams = new HashSet<String>();
 	anagrams.add(word.toLowerCase());
 	firstAnagramChars = word.toLowerCase().toCharArray();
