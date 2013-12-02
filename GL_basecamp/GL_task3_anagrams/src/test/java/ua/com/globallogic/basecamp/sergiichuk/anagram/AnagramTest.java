@@ -25,6 +25,11 @@ public class AnagramTest {
 	anagramSize = 1;
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testConstructorIllegalArgumentException() {
+	anagramSet = new AnagramSet(null);
+    }
+
     @Test
     public void testAddAnagramWordPlusNumber() {
 	anagramSet = new AnagramSet(ONE_POOL);
