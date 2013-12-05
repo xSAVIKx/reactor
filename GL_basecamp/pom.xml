@@ -35,6 +35,7 @@
 		<module>GL_task2_list_tree</module>
 		<module>GL_task3_anagrams</module>
     <module>GL_task4_queue</module>
+    <module>GL_task5_concurent_primes_searcher</module>
   </modules>
 	<dependencyManagement>
 		<dependencies>

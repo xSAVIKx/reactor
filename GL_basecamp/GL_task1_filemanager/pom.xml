@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>GL_basecamp_task1</groupId>
-  <artifactId>file_manager</artifactId>
+  <artifactId>GL_task1_filemanager</artifactId>
   <version>1.0.0</version>
   <name>GL Basecamp Task1 - File Manager</name>
   <url>http://maven.apache.org</url>
@@ -19,7 +19,6 @@
     <dependency>
     	<groupId>org.mockito</groupId>
     	<artifactId>mockito-all</artifactId>
-    	<version>1.9.5</version>
     	<scope>test</scope>
     </dependency>
   </dependencies>
