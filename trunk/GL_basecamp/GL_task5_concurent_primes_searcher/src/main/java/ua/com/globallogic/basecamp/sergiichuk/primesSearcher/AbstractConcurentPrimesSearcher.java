@@ -160,15 +160,22 @@ public abstract class AbstractConcurentPrimesSearcher implements
 	    }
 	}
 
-	private boolean isPrime(long number) {
+	private boolean isPrime(final long number) {
+	    if (number == 0 || number == 1)
+		return false;
 	    if (number == 2 || number == 3 || number == 5)
 		return true;
-	    if (number == 4 || number == 1 || number == 0)
+	    if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0)
 		return false;
-	    for (int i = 2; i < number >> 1; i++) {
-		if (number % i == 0)
-		    return false;
+	    long bound = (long) Math.sqrt(number);
+	    long i = 7;
+	    long j = 11;
+	    while ((j <= bound) && (number % i) > 0 && (number % j) > 0) {
+		i += 6;
+		j += 6;
 	    }
+	    if (j <= bound || i <= bound && number % i == 0)
+		return false;
 	    return true;
 	}
     }
