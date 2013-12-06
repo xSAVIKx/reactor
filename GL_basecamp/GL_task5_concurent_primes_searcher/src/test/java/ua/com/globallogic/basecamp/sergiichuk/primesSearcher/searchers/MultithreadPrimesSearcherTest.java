@@ -17,12 +17,16 @@ public class MultithreadPrimesSearcherTest {
 
     @Before
     public void setUp() throws Exception {
-	multiThreadSearcher = new MultithreadPrimesSearcher(2, 10);
+	multiThreadSearcher = new MultithreadPrimesSearcher(2, 20);
 	primes = new ArrayList<>();
 	primes.add(2L);
 	primes.add(3L);
 	primes.add(5L);
 	primes.add(7L);
+	primes.add(11L);
+	primes.add(13L);
+	primes.add(17L);
+	primes.add(19L);
     }
 
     @Test
