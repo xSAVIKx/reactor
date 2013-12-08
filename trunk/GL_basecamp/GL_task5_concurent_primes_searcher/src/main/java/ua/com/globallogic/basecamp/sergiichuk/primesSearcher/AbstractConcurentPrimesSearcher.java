@@ -165,7 +165,7 @@ public abstract class AbstractConcurentPrimesSearcher implements
 		return false;
 	    if (number == 2 || number == 3 || number == 5)
 		return true;
-	    if (number % 2 == 0 || number % 3 == 0 || number % 5 == 0)
+	    if ((number&1) == 0 || number % 3 == 0 || number % 5 == 0)
 		return false;
 	    long bound = (long) Math.sqrt(number);
 	    long i = 7;
@@ -174,7 +174,7 @@ public abstract class AbstractConcurentPrimesSearcher implements
 		i += 6;
 		j += 6;
 	    }
-	    if (j <= bound || i <= bound && number % i == 0)
+	    if (j <= bound || i <= bound && (number % i) == 0)
 		return false;
 	    return true;
 	}
@@ -202,4 +202,5 @@ public abstract class AbstractConcurentPrimesSearcher implements
     public long getToRange() {
 	return toRange;
     }
+
 }
