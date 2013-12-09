@@ -2,7 +2,8 @@ package ua.com.globallogic.basecamp.sergiichuk.primesSearcher.searchers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import ua.com.globallogic.basecamp.sergiichuk.primesSearcher.AbstractConcurentPrimesSearcher;
 
@@ -21,22 +22,15 @@ public class ExecutorPrimesSearcher extends AbstractConcurentPrimesSearcher {
     public List<Long> searchPrimes() {
 	setBoundsArray();
 	primesList = new ArrayList<>();
-	Executor executor = new SearchExecutor();
+	ExecutorService executor = Executors
+		.newFixedThreadPool(boundsArray.length);
 	for (int i = 0; i < boundsArray.length; i++) {
 	    executor.execute(new SearchThread(boundsArray[i][0],
 		    boundsArray[i][1]));
 	}
+	executor.shutdown();
+	while (!executor.isTerminated())
+	    ;
 	return primesList;
-    }
-
-    private class SearchExecutor implements Executor {
-	SearchExecutor() {
-	}
-
-	@Override
-	public void execute(Runnable command) {
-	    command.run();
-	}
-
     }
 }
