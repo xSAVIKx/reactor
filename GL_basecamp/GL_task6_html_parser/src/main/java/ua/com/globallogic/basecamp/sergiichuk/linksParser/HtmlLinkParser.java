@@ -6,17 +6,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HtmlLinkParser {
+
     public final static String WELL_FORMED_LINKS_REGEXP = "[\\\"\\'](https?\\:\\/\\/)([\\w\\.]+)\\.([a-z]{2,6})([\\p{ASCII}&&[^\\\"\\'\\>\\<]])+?[\\\"\\']";
     public final static String RELATIVE_LINKS_REGEXP = "[\\\"\\']\\/([\\p{ASCII}&&[^\\\"\\'\\>\\<]])+?[\\\"\\']";
     public final static String ROOT_ELEMENT_LINK_REGEXP = "(https?\\:\\/\\/)([\\w\\.]+)\\.([a-z]{2,6})\\/?";
+    public final static String LINK_TO_FILENAME_REGEXP = "[\\\\\\?\\/\\:\\*\\|\\\"\\<\\>]";
+    public final static String REMOVE_ARGUMENT_LINK_REGEXP = "[^\\?]+";
+    public final static String GET_EXTENSION_FROM_MIME_TYPE_REGEXP = "\\/.+";
     private final static String QUOTES_REGEXP = "[\\\"\\']";
+
     private final static int MINIMUM_ROOT_ELEMENT_LENGTH = 12;
+
     private final static Pattern wellFormedLinksPattern = Pattern.compile(
 	    WELL_FORMED_LINKS_REGEXP, Pattern.CASE_INSENSITIVE);
+
     private final static Pattern relativeLinksPattern = Pattern.compile(
 	    RELATIVE_LINKS_REGEXP, Pattern.CASE_INSENSITIVE);
+
     private final static Pattern rootElementLinkPattern = Pattern.compile(
 	    ROOT_ELEMENT_LINK_REGEXP, Pattern.CASE_INSENSITIVE);
+
+    private final static Pattern removeArgumentFromLinkPattern = Pattern
+	    .compile(REMOVE_ARGUMENT_LINK_REGEXP, Pattern.CASE_INSENSITIVE);
+    private final static Pattern getExtensionFromMimeType = Pattern.compile(
+	    GET_EXTENSION_FROM_MIME_TYPE_REGEXP, Pattern.CASE_INSENSITIVE);
 
     /**
      * Parse given text to match HTML well formed links pattern and return set
@@ -165,5 +178,39 @@ public class HtmlLinkParser {
 	if (rootElementFromLinkMatcher.find())
 	    return rootElementFromLinkMatcher.group();
 	return null;
+    }
+
+    public static String getFileNameFromLink(String link) {
+	if (link == null || link.isEmpty())
+	    throw new IllegalArgumentException("Link cannot be null or empty");
+	return link.replaceAll(LINK_TO_FILENAME_REGEXP, "_").trim();
+    }
+
+    public static String removeArgumentsFromLink(String link) {
+	if (link == null || link.isEmpty())
+	    throw new IllegalArgumentException("Link cannot be null or empty");
+	Matcher removeArgumentsMatcher = removeArgumentFromLinkPattern
+		.matcher(link);
+	if (removeArgumentsMatcher.find())
+	    return removeArgumentsMatcher.group();
+	return link;
+    }
+
+    /**
+     * Return extension from valid mime type with leading '/' symbol
+     * 
+     * @param mimeType
+     *            valid mime type
+     * @return extension, if can be matcher, otherwise - empty("")
+     */
+    public static String getExtensionFromMimeType(String mimeType) {
+	if (mimeType == null || mimeType.isEmpty())
+	    throw new IllegalArgumentException(
+		    "Mime type cannot be null or empty");
+	Matcher getExtensionFromMimeTypeMatcher = getExtensionFromMimeType
+		.matcher(mimeType);
+	if (getExtensionFromMimeTypeMatcher.find())
+	    return getExtensionFromMimeTypeMatcher.group();
+	return "";
     }
 }
