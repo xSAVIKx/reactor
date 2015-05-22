@@ -1,0 +1,1 @@
+This project contain Maven modules, where each module is a separate task.
